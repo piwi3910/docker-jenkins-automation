@@ -19,3 +19,9 @@ RUN apt update -y \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
+
+ADD get-latest-terraform.sh /tmp/get-latest-terraform.sh
+RUN chmod +x /tmp/get-latest-terraform.sh \
+    && cd /usr/bin \
+    && /tmp/get-latest-terraform.sh
+
