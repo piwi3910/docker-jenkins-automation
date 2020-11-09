@@ -8,9 +8,9 @@ LABEL   maintainer="Pascal Watteel" \
 ENV DEBIAN_FRONTEND noninteractive
 
 # Requirements
-RUN apt update -y \
-    && apt upgrade -y \
-    && apt install -y   default-jre \
+RUN apt-get update -y \
+    && apt-get upgrade -y \
+    && apt-get install -y   default-jre \
                         wget \
                         python3-pip \
                         jq \
@@ -21,6 +21,7 @@ RUN apt update -y \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
+# Install latest terraform
 ADD get-latest-terraform.sh /tmp/get-latest-terraform.sh
 RUN chmod +x /tmp/get-latest-terraform.sh \
     && cd /usr/bin \
