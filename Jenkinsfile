@@ -2,16 +2,12 @@ pipeline {
   agent {
     node {
       label 'docker'
-    }
-
-  }
-  stages {
-    stage('Prepare') {
-      steps {
-        sh 'docker login --username $Dockerhub_Username --password $Dockerhub_Password'
+      withCredentials([usernameColonPassword(credentialsId: '498d4836-2247-4552-9e29-ba033c065528', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+      sh 'docker login --username $USERNAME --password $PASSWORD'
       }
     }
 
+  }
     stage('Build') {
       steps {
         sh 'ls -la'
@@ -25,9 +21,5 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    Dockerhub_Username = 'piwi3910'
-    Dockerhub_Password = 'Jbz49teq01!'
   }
 }
