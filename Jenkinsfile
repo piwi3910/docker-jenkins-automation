@@ -15,24 +15,26 @@ pipeline {
     stage('Build') {
       steps {
         sh 'ls -la'
-        sh 'docker build -t piwi3910/jenkins-automation:latest .'
+        sh 'docker build -t $DockerName:$DockerTag .'
       }
     }
 
     stage('Push') {
       steps {
-        sh 'docker push piwi3910/jenkins-automation:latest'
+        sh 'docker push $DockerName:$DockerTag'
       }
     }
 
     stage('Cleanup') {
       steps {
-        sh 'docker rmi piwi3910/jenkins-automation:latest'
+        sh 'docker rmi $DockerName:$DockerTag'
       }
     }
 
   }
   environment {
+    DockerName = "piwi3910/jenkins-automation"
+    DockerTag = "latest"
     DOCKERHUB_CRED = credentials("498d4836-2247-4552-9e29-ba033c065528")
     Dockerhub_Username = "${env.DOCKERHUB_CRED_USR}"
     Dockerhub_Password = "${env.DOCKERHUB_CRED_PSW}"
