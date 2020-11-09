@@ -2,12 +2,16 @@ pipeline {
   agent {
     node {
       label 'docker'
-      withCredentials([usernameColonPassword(credentialsId: '498d4836-2247-4552-9e29-ba033c065528', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-      sh 'docker login --username $USERNAME --password $PASSWORD'
-      }
     }
 
   }
+  stages {
+    stage('Prepare') {
+      steps {
+        sh 'docker login --username $Dockerhub_Username --password $Dockerhub_Password'
+      }
+    }
+
     stage('Build') {
       steps {
         sh 'ls -la'
@@ -21,4 +25,10 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    DOCKERHUB_CRED = credentials("498d4836-2247-4552-9e29-ba033c065528")
+    Dockerhub_Username = "${env.DOCKERHUB_CRED_USR}"
+    Dockerhub_Password = "${env.DOCKERHUB_CRED_PSW}"
+  }
 }
