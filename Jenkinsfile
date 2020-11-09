@@ -15,13 +15,13 @@ pipeline {
     stage('Build') {
       steps {
         sh 'ls -la'
-        sh 'docker build -t piwi3910/jenkins-automation .'
+        sh 'docker build -t piwi3910/jenkins-automation:latest .'
       }
     }
 
     stage('Push') {
       steps {
-        sh 'docker push piwi3910/jenkins-automation'
+        sh 'docker push piwi3910/jenkins-automation:latest'
       }
     }
 
