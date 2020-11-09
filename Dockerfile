@@ -14,6 +14,7 @@ RUN apt update -y \
                         wget \
                         python3-pip \
                         jq \
+                        curl \
                         unzip \
                         git \
     && apt-get clean autoclean \
