@@ -15,6 +15,7 @@ RUN apt update -y \
                         python3-pip \
                         jq \
                         unzip \
+                        git \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
