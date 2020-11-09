@@ -25,6 +25,12 @@ pipeline {
       }
     }
 
+    stage('Cleanup') {
+      steps {
+        sh 'docker rmi piwi3910/jenkins-automation:latest'
+      }
+    }
+
   }
   environment {
     DOCKERHUB_CRED = credentials("498d4836-2247-4552-9e29-ba033c065528")
