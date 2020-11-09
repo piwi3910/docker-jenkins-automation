@@ -14,6 +14,7 @@ pipeline {
 
     stage('Build') {
       steps {
+        sh 'ls -la'
         sh 'docker build -t piwi3910/jenkins-automation .'
       }
     }
